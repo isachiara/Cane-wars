@@ -52,8 +52,7 @@ public class Bala extends Actor
         Actor inimigo = getOneObjectAtOffset(0,0, Inimigo.class);
         Space space=(Space)getWorld();
         Inimigo inimigos=space.retornaInimigo(getX(),getY());
-        if (inimigo != null){          
-
+        if (inimigo != null){
             inimigos.Morrer();
             return true;   
         }

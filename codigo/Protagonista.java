@@ -21,11 +21,18 @@ public  class Protagonista extends Naves
     }
        public void act() 
     {
-        Mover();             
+        Mover();
+        darPosicao();
                 if(Greenfoot.isKeyDown("space")){
             Atirar();
         }        
     } 
+    public void darPosicao(){
+    Space space=(Space)getWorld();    
+    space.posicaoProtagonistaX(getX());
+    space.posicaoProtagonistaY(getY());    
+        
+    }
     
     public void Mover(){       
         if(Greenfoot.isKeyDown("right")){   

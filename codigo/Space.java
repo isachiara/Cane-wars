@@ -9,10 +9,11 @@ import java.util.List;
  
 public class Space extends World
 {       
-     private int rounds = 0;
+    private int rounds = 0;
     private int numeroInimigos = 5;
     private int pontos = 0;
-   
+    int protX;
+    int protY;
     /**
      * Constructor for objects of class Space.
      * 
@@ -35,34 +36,39 @@ public class Space extends World
      * Prepare the world for the start of the program. That is: create the initial
      * objects and add them to the world.
      */
-        private void prepare()  
+   private void prepare()  
     {   
 
         //Greenfoot.playSound("star wars imperial march.mp3");
         Protagonista protagonista = new Protagonista();
-        addObject(protagonista, 5, 14);  
-        
-        if(numeroInimigos != 0){
+        addObject(protagonista, 5, 14);         
         for(int i = 0; i < numeroInimigos; i++)
         {
             Inimigo inimigo = new Inimigo();
             int x = Greenfoot.getRandomNumber(getWidth());
             int y = Greenfoot.getRandomNumber(getHeight() - 7);
             if(testeInimigos(x, y) == false){
-                
-                if(y != 0){             
+                    
+                    if(y != 0){
                     addObject(inimigo, x, y);
-                }
-                
+               }
+               else
+               {
+                   y++;
+                   addObject(inimigo, x, y);
+               }
+               
             }
             else
             {
+             i--;
              x = Greenfoot.getRandomNumber(getWidth());
-             y = Greenfoot.getRandomNumber(getHeight());
+             y = Greenfoot.getRandomNumber(getHeight() - 7);
             }
         }
+      
     }
-   }
+
     
     public boolean testeInimigos(int x, int y)
     {
@@ -74,35 +80,54 @@ public class Space extends World
         return true;
     }
     
-    public void rounds()
+        public void rounds()
     {
         List numeroObjetos = getObjects(Inimigo.class);
         if(numeroObjetos.isEmpty())
         {
-           rounds++;
-           if(numeroInimigos != 0){
+            rounds++;
+           
            for(int i = 0; i < numeroInimigos; i++)
-           {
+         {
             Inimigo inimigo = new Inimigo();
             int x = Greenfoot.getRandomNumber(getWidth());
-            int y = Greenfoot.getRandomNumber(getHeight() - 3);
+            int y = Greenfoot.getRandomNumber(getHeight() - 7);
             if(testeInimigos(x, y) == false){
-             addObject(inimigo, x, y);
+                    
+                    if(y != 0){
+                    addObject(inimigo, x, y);
+               }
+               else
+               {
+                   y++;
+                   addObject(inimigo, x, y);
+               }
+               
             }
             else
             {
+             i--;
              x = Greenfoot.getRandomNumber(getWidth());
-             y = Greenfoot.getRandomNumber(getHeight());
+             y = Greenfoot.getRandomNumber(getHeight() - 7);
             }
-           }
-        }
+         }
+         }
      }
+    public int posicaoProtagonistaX(int x){
+        protX=x;    
+            return x;
     }
-    public Protagonista retornaProtagonista(){// esse metodo retorna o protagonista que está no space
-    List<Protagonista> objetos=getObjects(Protagonista.class);
-            if(objetos.isEmpty()){
     
-                return null;
+    public int posicaoProtagonistaY(int y){
+            protY=y;    
+            return y;
+    }
+    
+    public Protagonista retornaProtagonista(){// esse metodo retorna o protagonista que está no space
+    List<Protagonista> objetos=getObjectsAt(protX,protY,Protagonista.class);
+    if(objetos.isEmpty()){
+    
+         return null;
     }
     Protagonista prot=objetos.get(0);  
     return prot;
