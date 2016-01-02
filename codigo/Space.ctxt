@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Space()
+comment0.text=\r\n\ Constructor\ for\ objects\ of\ class\ Space.\r\n\ \r\n
+comment1.params=
+comment1.target=void\ act()
+comment2.params=
+comment2.target=void\ prepare()
+comment2.text=\r\n\ Prepare\ the\ world\ for\ the\ start\ of\ the\ program.\ That\ is\:\ create\ the\ initial\r\n\ objects\ and\ add\ them\ to\ the\ world.\r\n
+comment3.params=x\ y
+comment3.target=boolean\ testeInimigos(int,\ int)
+comment4.params=
+comment4.target=void\ rounds()
+comment5.params=
+comment5.target=Protagonista\ retornaProtagonista()
+comment6.params=x\ y
+comment6.target=Inimigo\ retornaInimigo(int,\ int)
+numComments=7

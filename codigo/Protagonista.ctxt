@@ -1,0 +1,16 @@
+#BlueJ class context
+comment0.params=
+comment0.target=Protagonista()
+comment1.params=
+comment1.target=void\ act()
+comment2.params=
+comment2.target=void\ Mover()
+comment3.params=
+comment3.target=void\ Atirar()
+comment4.params=
+comment4.target=void\ tirarVida()
+comment5.params=
+comment5.target=void\ Morrer()
+comment6.params=
+comment6.target=void\ Pontos()
+numComments=7
