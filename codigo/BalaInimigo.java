@@ -11,13 +11,14 @@ public class BalaInimigo extends Actor
 {
     int xbala,ybala;  
     int vidas;
-    /**
-     * Act - do whatever the BalaInimigo wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     public BalaInimigo(){
         
-    }   
+    }  
+    
+    /**
+    * Act - do whatever the BalaInimigo wants to do. This method is called whenever
+    * the 'Act' or 'Run' button gets pressed in the environment.
+    */
     public void act() 
     {                      
         mover(xbala,ybala+1);//o +1 no ybala serve para a bala se mover para frente
@@ -71,7 +72,6 @@ public class BalaInimigo extends Actor
         return false;
     }
     
-   
     public void killBala(){  
         Actor Bala = getOneObjectAtOffset(0,0, Bala.class);  
         if (foundBala() == true){
@@ -79,6 +79,4 @@ public class BalaInimigo extends Actor
             getWorld().removeObject(this);
         }
     }  
-    
-    
 }

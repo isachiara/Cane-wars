@@ -1,33 +1,32 @@
 import greenfoot.*;
 
 /**
- * Write a description of class Inimigo here.
+ * Write a description of class Chefe here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Inimigo extends Naves
-{ 
+public class Chefe extends Naves
+{
     /**
-     * Act - do whatever the Inimigo wants to do. This method is called whenever
+     * Act - do whatever the Chefe wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    int pontos = 150;
+    int lives = 5;
+    int mover = 2;
     int auxiliar = 0;
-    int mover=1;  
-    int pontos=5;
     public void act() 
-    {      
-        Mover();        
-        // Add your action code here.
+    {
+        Mover();
         int i = auxiliar;
-        //i=//getRandomNumber(auxiliar);
         if(i==12){
             Atirar();
             auxiliar=0;
         }
         i=auxiliar+1;
         auxiliar = i;
-    }  
+    }
     
     public void Mover(){
         move(mover);
@@ -45,15 +44,23 @@ public class Inimigo extends Naves
         bala_Inimigo.SetXY(getX(),getY());
     }
     
+    public void tirarVida()
+    {
+       if(lives>0){
+         --lives;
+       }
+       
+       if (lives == 0){     
+           Morrer();        
+       }        
+    }
+    
     public void Morrer(){
        Space space=(Space)getWorld();
        Protagonista prot=space.retornaProtagonista();
        prot.pontuação=prot.pontuação+pontos;
+       getWorld().showText("Você venceu ^_^",4,4);
        getWorld().removeObject(this);
+       Greenfoot.stop();
     }
 }
-    
-    
-    
-    
-

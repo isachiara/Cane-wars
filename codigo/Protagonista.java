@@ -16,25 +16,30 @@ public  class Protagonista extends Naves
     int aux;     
     int TempodeTiro=0;
     int pontuação=0;
-    public Protagonista(){           
+    public Protagonista()
+    {           
        
     }
-       public void act() 
+    
+    public void act() 
     {
         Mover();
         darPosicao();
-                if(Greenfoot.isKeyDown("space")){
+        if(Greenfoot.isKeyDown("space")){
             Atirar();
         }        
     } 
-    public void darPosicao(){
-    Space space=(Space)getWorld();    
-    space.posicaoProtagonistaX(getX());
-    space.posicaoProtagonistaY(getY());    
+    
+    public void darPosicao()
+    {
+       Space space=(Space)getWorld();    
+       space.posicaoProtagonistaX(getX());
+       space.posicaoProtagonistaY(getY());    
         
     }
     
-    public void Mover(){       
+    public void Mover()
+    {       
         if(Greenfoot.isKeyDown("right")){   
             move(1);
             
@@ -43,11 +48,16 @@ public  class Protagonista extends Naves
             move(-1);
             
        }    
-      }
-    public void Atirar(){
-        if (TempodeTiro>0){
+    }
+    
+    public void Atirar()
+    {
+        if (TempodeTiro>0)
+        {
             TempodeTiro=TempodeTiro-1;
-        }else if (Greenfoot.isKeyDown("space")){
+        }
+        else if (Greenfoot.isKeyDown("space"))
+        {
             Bala bala=new Bala();        
             getWorld().addObject(bala,getX(),getY());
             bala.SetXY(getX(),getY()); 
@@ -55,23 +65,18 @@ public  class Protagonista extends Naves
         }
     }    
 
-     public void tirarVida(){// vai matando devagar o personagem
-     if(lives>0){
-         System.out.println("Vida atual:"+lives);
-         --lives;   
-         System.out.println("Vida depois de removida:"+lives);
-      }
-          if (lives==0){     
-         Morrer();        
-    }
-               
-    }   
-    public void Morrer(){
-    getWorld().removeObject(this);
-        Greenfoot.stop();
+     public void tirarVida()// vai matando devagar o personagem
+     {
+        if(lives>0){
+           --lives;   
+        }
+        if(lives==0){     
+           Morrer();        
+        }   
+    }  
     
-    }
-    public void Pontos(){
-    System.out.println("Esta e a minha pontuação atual:"+pontuação);
+    public void Morrer()
+    {
+        getWorld().removeObject(this);
     }
 }

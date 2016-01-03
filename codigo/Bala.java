@@ -9,7 +9,7 @@ import greenfoot.*;
 import java.util.List;
 public class Bala extends Actor
 {
-   int xbala,ybala;
+    int xbala,ybala;
     /**
      * Act - do whatever the Bala wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -23,6 +23,7 @@ public class Bala extends Actor
     {              
         mover(xbala,ybala-1);  
         foundEnemy();
+        foundBoss();
         if (getY() == 0){
             DeleteAtWorldEdge();
         }
@@ -55,6 +56,19 @@ public class Bala extends Actor
         if (inimigo != null){
             inimigos.Morrer();
             return true;   
+        }
+        return false;
+    }
+    
+    public boolean foundBoss()
+    {                   
+        Actor boss = getOneObjectAtOffset(0,0, Chefe.class);
+        Space space=(Space)getWorld();
+        Chefe chefes =space.retornaBoss(getX(),getY());
+        if (boss != null){            
+            chefes.tirarVida();          
+            return true;   
+            
         }
         return false;
     }
