@@ -10,12 +10,19 @@ import java.lang.String;
  
 public class Space extends World
 {
-   private int rounds = 10;
    private int bossRound = 10;
-   private int numeroInimigos = 5; 
+   private int numeroInimigos = 5;
+   private int tempoAux = 0;
+   private int tempo = 0;
+   int rounds = 0;
    int protX;
    int protY;
    Protagonista protagonista = new Protagonista();
+   GreenfootSound bgSound = new GreenfootSound("what is love 8 bit.mp3");
+   GreenfootSound Morte = new GreenfootSound("CholaMais_8bit.mp3");
+   GreenfootSound BossSound = new GreenfootSound("Gym Battle vs. Turkey.mp3");
+   GreenfootSound Victory = new GreenfootSound ("Victory.mp3");
+   Chefe boss = new Chefe();
    Vidas vida = new Vidas();
    /**
     * Constructor for objects of class Space.
@@ -29,7 +36,9 @@ public class Space extends World
     
    public void act()
    {
+        tempoAux++;
         mostrarPontuacao();
+        contarTempo();
         mostrarVida();
         mostrarRound();
         protagonistaMorto();
@@ -49,7 +58,7 @@ public class Space extends World
      */
    private void prepare()  
     {
-        //Greenfoot.playSound("star wars imperial march.mp3");
+        bgSound.play();
         addObject(protagonista, 5, 14);
         for(int i = 0; i < numeroInimigos; i++)
         {
@@ -122,14 +131,25 @@ public class Space extends World
         }
      }
    
-   public void FinalRound()//Chama o boss e finaliza o jogo, caso o player vença o boss
+   public void FinalRound()
    {
+        bgSound.stop();
         List numeroObjetos = getObjects(Chefe.class);
-        if(numeroObjetos.isEmpty())
+        
+        if(rounds > bossRound)
+        {
+          BossSound.stop();
+          Victory.play();
+          showText("Você Venceu! ^^",4,4);
+          showText(""+tempo+"s", 4,5);
+          Greenfoot.stop(); 
+        }
+        else if(numeroObjetos.isEmpty())
         {  
+             BossSound.playLoop();
+             
              for(int i = 0; i < 1; i++)
              {
-                Chefe boss = new Chefe();
                 int x = Greenfoot.getRandomNumber(getWidth());
                 int y = Greenfoot.getRandomNumber(getHeight() - 7);
                  if(y != 0){
@@ -141,10 +161,6 @@ public class Space extends World
                            addObject(boss, x, y);
                         }
              }
-        }
-        if(rounds > bossRound)
-        {
-          Greenfoot.stop(); 
         }
    }
     
@@ -160,7 +176,7 @@ public class Space extends World
        return y;
    }
     
-   public Protagonista retornaProtagonista(){// esse metodo retorna o protagonista que está no space
+   public Protagonista retornaProtagonista(){
       List<Protagonista> objetos=getObjectsAt(protX,protY,Protagonista.class);
       if(objetos.isEmpty())
       {
@@ -191,7 +207,7 @@ public class Space extends World
       return chefe;
    }
    
-   public void mostrarVida()//criei uma nova classe vida pra poder setar a Imagem dela pois estava complicado sem isso
+   public void mostrarVida()
    {
       Protagonista protagonista= this.protagonista;
       Vidas vida= this.vida;
@@ -254,8 +270,22 @@ public class Space extends World
       int lives= protagonista.lives;
       if(lives == 0)
       {
+          BossSound.stop();
+          bgSound.stop();
+          Morte.play();
           showText("Você Perdeu!", 5, 5);
           Greenfoot.stop();
+      }
+   }
+   
+    public void contarTempo()
+   {
+      if(tempoAux == 6)
+      {
+         tempoAux = 0;
+         tempo++;
+         String mostraTempo = ""+tempo+"s";
+         showText(mostraTempo, 1, 0);
       }
    }
 }

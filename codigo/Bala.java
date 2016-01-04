@@ -22,11 +22,14 @@ public class Bala extends Actor
     public void act() 
     {              
         mover(xbala,ybala-1);  
-        foundEnemy();
-        foundBoss();
-        if (getY() == 0){
-            DeleteAtWorldEdge();
-        }
+        foundEnemy();  
+        if (foundBoss()==true){
+        killBoss();
+        getWorld().removeObject(this);
+        }    
+        else {
+        DeleteAtWorldEdge();
+        }             
     }
     
     public void mover(int x,int y){    
@@ -41,10 +44,10 @@ public class Bala extends Actor
     
     public void DeleteAtWorldEdge()
     {
-        if  (getY() == 0)        
+        if  (getY() == 1)        
         {           
             Greenfoot.delay(1);
-            getWorld().removeObject(this);            
+            getWorld().removeObject(this);         
         }
     }
       
@@ -62,14 +65,17 @@ public class Bala extends Actor
     
     public boolean foundBoss()
     {                   
-        Actor boss = getOneObjectAtOffset(0,0, Chefe.class);
-        Space space=(Space)getWorld();
-        Chefe chefes =space.retornaBoss(getX(),getY());
+        Actor boss = getOneObjectAtOffset(0,0, Chefe.class);        
         if (boss != null){            
-            chefes.tirarVida();          
-            return true;   
-            
+                     
+            return true;             
         }
         return false;
+    }  
+    
+    public void killBoss(){
+        Space space=(Space)getWorld();
+        Chefe chefes =space.retornaBoss(getX(),getY());
+        chefes.tirarVida();  
     }
 }

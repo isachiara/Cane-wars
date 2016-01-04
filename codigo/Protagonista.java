@@ -16,6 +16,7 @@ public  class Protagonista extends Naves
     int aux;     
     int TempodeTiro=0;
     int pontuação=0;
+    GreenfootSound shot = new GreenfootSound ("shot.mp3");
     public Protagonista()
     {           
        
@@ -58,6 +59,7 @@ public  class Protagonista extends Naves
         }
         else if (Greenfoot.isKeyDown("space"))
         {
+            shot.play();
             Bala bala=new Bala();        
             getWorld().addObject(bala,getX(),getY());
             bala.SetXY(getX(),getY()); 

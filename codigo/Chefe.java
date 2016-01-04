@@ -16,8 +16,10 @@ public class Chefe extends Naves
     int lives = 5;
     int mover = 2;
     int auxiliar = 0;
+    
     public void act() 
     {
+        
         Mover();
         int i = auxiliar;
         if(i==12){
@@ -59,8 +61,7 @@ public class Chefe extends Naves
        Space space=(Space)getWorld();
        Protagonista prot=space.retornaProtagonista();
        prot.pontuação=prot.pontuação+pontos;
-       getWorld().showText("Você venceu ^_^",4,4);
+       space.rounds++;
        getWorld().removeObject(this);
-       Greenfoot.stop();
     }
 }
